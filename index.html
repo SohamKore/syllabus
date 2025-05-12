@@ -9,60 +9,135 @@
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 20px;
+  /* General body styling */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+
+  /* Title Styling */
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  /* Search Bar Styling */
+  .search-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .search-container input {
+    padding: 12px 20px;
+    font-size: 18px;
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+  }
+
+  .search-container input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
+  }
+
+  /* Card Container */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  /* Card Styling */
+  .card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Card Icon */
+  .icon {
+    font-size: 36px;
+    color: #e74c3c;
+  }
+
+  /* Card Title */
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s;
+    flex: 1;
+  }
+
+  .title:hover {
+    color: #3498db;
+  }
+
+  /* Footer Styling */
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #888;
+    font-size: 14px;
+  }
+
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .search-container input {
+      width: 90%;
     }
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
+  }
+
+  /* Responsive design for mobile */
+  @media (max-width: 480px) {
     .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .card:hover {
-      transform: translateY(-5px);
-    }
+
     .icon {
-      font-size: 30px;
-      color: #e74c3c;
+      font-size: 28px;
     }
+
     .title {
       font-size: 16px;
-      font-weight: bold;
-      color: #333;
-      text-decoration: none;
-      flex: 1;
     }
-    .title:hover {
-      color: #3498db;
-    }
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #888;
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body>
   <h1><i class="fas fa-book-open"></i> Syllabus PDFs</h1>
+  
+  <div class="search-container">
+  <input type="text" id="pdfSearch" placeholder="Search PDF..." onkeyup="filterPDFs()" />
+</div>
+
   <div class="container">
     <!-- PDF Cards Start -->
     <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="ADV EXCEL.pdf" target="_blank">ADV EXCEL.pdf</a></div>
@@ -115,4 +190,29 @@
     <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Tally.pdf" target="_blank">Tally.pdf</a></div>
 <!-- PDF Cards End -->
 
-</div> <footer> <p>&copy; 2025 Disha Computer Institute. All rights reserved.</p> </footer> </body> </html>
+</div> <footer> <p>&copy; 2025 Disha Computer Institute. All rights reserved.</p> </footer>
+
+<script>
+  function filterPDFs() {
+    var input, filter, container, cards, title, i, txtValue;
+    input = document.getElementById("pdfSearch");
+    filter = input.value.toUpperCase();
+    container = document.querySelector(".container");
+    cards = container.getElementsByClassName("card");
+
+    // Loop through all the cards
+    for (i = 0; i < cards.length; i++) {
+      title = cards[i].getElementsByClassName("title")[0];
+      if (title) {
+        txtValue = title.textContent || title.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
+ </body> </html>
