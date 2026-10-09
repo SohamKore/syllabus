@@ -1,236 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Syllabus PDFs - Disha Computer Institute</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-  /* General body styling */
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: #f7f7f7;
-    margin: 0;
-    padding: 20px;
-    color: #333;
-  }
+<meta charset="UTF-8">
+<title>Syllabus Library - Disha Computer Institute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--bg:#0a0d1f;--ink:#eef0ff;--mute:#9aa1c7;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--a:#7c5cff;--b:#00d4ff;--c:#ff5ca8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;overflow-x:hidden;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orbs i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:float 18s ease-in-out infinite}
+.orbs i:nth-child(1){width:46vmax;height:46vmax;background:var(--a);top:-15vmax;left:-10vmax}
+.orbs i:nth-child(2){width:38vmax;height:38vmax;background:var(--b);bottom:-14vmax;right:-8vmax;animation-delay:-6s}
+.orbs i:nth-child(3){width:28vmax;height:28vmax;background:var(--c);top:40%;left:55%;animation-delay:-12s;opacity:.35}
+@keyframes float{50%{transform:translate(6vmax,-5vmax) scale(1.12)}}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.18;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%)}
 
-  /* Title Styling */
-  h1 {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-size: 36px;
-    font-weight: 700;
-  }
+/* Lock screen */
+#lock{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,13,31,.55);backdrop-filter:blur(14px);transition:opacity .7s,transform .7s,visibility .7s}
+#lock.gone{opacity:0;transform:scale(1.08);visibility:hidden}
+.lockbox{width:100%;max-width:420px;text-align:center;padding:40px 32px 30px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.15);animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.96)}}
+.lockbox.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-12px)}40%,80%{transform:translateX(12px)}}
+.shield{width:92px;height:92px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 0 0 rgba(124,92,255,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 26px rgba(124,92,255,0)}100%{box-shadow:0 0 0 0 rgba(124,92,255,0)}}
+.lockbox h2{font-family:'Unbounded',sans-serif;font-size:22px;margin:0 0 8px}
+.lockbox p{margin:0 0 22px;color:var(--mute);font-size:15px}
+.field{position:relative;margin-bottom:12px}
+.field input{width:100%;padding:15px 48px 15px 46px;font:500 16px 'Outfit',sans-serif;color:var(--ink);background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;transition:.25s}
+.field input:focus{outline:none;border-color:var(--b);box-shadow:0 0 0 4px rgba(0,212,255,.18)}
+.field .l,.field .eye{position:absolute;top:50%;transform:translateY(-50%);color:var(--mute)}
+.field .l{left:16px}
+.field .eye{right:6px;background:none;border:0;color:var(--mute);cursor:pointer;padding:10px 12px;font-size:16px}
+.field .eye:hover,.field .eye:focus-visible{color:var(--ink)}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;font:600 16px 'Outfit',sans-serif;color:#fff;cursor:pointer;background:linear-gradient(120deg,var(--a),var(--b));transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,92,255,.45)}
+.err{min-height:20px;margin:0 0 10px!important;color:#ff6b86!important;font-size:14px!important}
+.skip{margin-top:20px!important;margin-bottom:0!important;font-size:14px!important}
+kbd{padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.1);border:1px solid var(--line);font:600 13px 'Outfit',sans-serif}
 
-  /* Search Bar Styling */
-  .search-container {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .search-container input {
-    padding: 12px 20px;
-    font-size: 18px;
-    width: 80%;
-    max-width: 500px;
-    margin: 0 auto;
-    border-radius: 30px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
-  }
-
-  .search-container input:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.3);
-  }
-
-  /* Card Container */
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  /* Card Styling */
-  .card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Card Icon */
-  .icon {
-    font-size: 36px;
-    color: #e74c3c;
-  }
-
-  /* Card Title */
-  .title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #2c3e50;
-    text-decoration: none;
-    transition: color 0.3s;
-    flex: 1;
-  }
-
-  .title:hover {
-    color: #3498db;
-  }
-
-  /* Footer Styling */
-  footer {
-    text-align: center;
-    margin-top: 40px;
-    color: #888;
-    font-size: 14px;
-  }
-
-  /* Responsive design for smaller screens */
-  @media (max-width: 768px) {
-    .search-container input {
-      width: 90%;
-    }
-  }
-
-  /* Responsive design for mobile */
-  @media (max-width: 480px) {
-    .card {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .icon {
-      font-size: 28px;
-    }
-
-    .title {
-      font-size: 16px;
-    }
-  }
+/* App */
+#app{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:36px 20px 70px;opacity:0;pointer-events:none;filter:blur(10px)}
+#app.on{opacity:1;pointer-events:auto;filter:none;transition:opacity .8s .2s,filter .8s .2s}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600}
+.brand span{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--c))}
+.lockbtn{background:var(--glass);border:1px solid var(--line);color:var(--ink);padding:10px 16px;border-radius:12px;font:500 14px 'Outfit',sans-serif;cursor:pointer}
+.lockbtn:hover{border-color:var(--c)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;padding:54px 0 30px}
+.hero h1{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,66px);line-height:1.05;margin:0 0 18px;background:linear-gradient(100deg,#fff,var(--b),var(--a),var(--c),#fff);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:-250% 0}}
+.hero p{color:var(--mute);font-size:18px;max-width:46ch;margin:0 0 26px}
+.stats{display:flex;gap:14px;flex-wrap:wrap}
+.stat{padding:14px 20px;border-radius:16px;background:var(--glass);border:1px solid var(--line)}
+.stat b{display:block;font-family:'Unbounded',sans-serif;font-size:26px}
+.stat small{color:var(--mute)}
+.art{width:100%;max-width:380px;justify-self:center;animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px) rotate(1.5deg)}}
+.searchwrap{position:relative;max-width:620px;margin:10px 0 22px}
+.searchwrap i{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--mute)}
+.searchwrap input{width:100%;padding:16px 22px 16px 52px;border-radius:40px;font:500 17px 'Outfit',sans-serif;color:var(--ink);background:var(--glass);border:1px solid var(--line);transition:.25s}
+.searchwrap input:focus{outline:none;border-color:var(--a);box-shadow:0 0 0 5px rgba(124,92,255,.2)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:30px;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:500 14px 'Outfit',sans-serif;cursor:pointer;transition:.25s}
+.chip:hover{transform:translateY(-2px)}
+.chip.act{background:linear-gradient(120deg,var(--a),var(--b));border-color:transparent}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{--h:#7c5cff;position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;border-radius:22px;text-decoration:none;color:var(--ink);background:var(--glass);border:1px solid var(--line);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;animation:pop .6s both}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--h) 35%,transparent),transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover,.card:focus-visible{transform:translateY(-6px);border-color:var(--h);box-shadow:0 18px 40px color-mix(in srgb,var(--h) 30%,transparent);outline:none}
+.card:hover::before{opacity:1}
+.ic{position:relative;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:24px;color:#fff;background:var(--h);box-shadow:0 8px 20px color-mix(in srgb,var(--h) 55%,transparent);transition:transform .35s}
+.card:hover .ic{transform:rotate(-8deg) scale(1.1)}
+.nm{position:relative;font-weight:600;font-size:18px;line-height:1.3}
+.meta{position:relative;display:flex;justify-content:space-between;align-items:center;margin-top:auto;color:var(--mute);font-size:13px}
+.view{display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:600}
+.card:hover .view i{transform:translateX(4px)}
+.view i{transition:.25s}
+.empty{display:none;text-align:center;padding:60px 0;color:var(--mute)}
+.empty i{font-size:44px;margin-bottom:12px;color:var(--a)}
+footer{position:relative;z-index:1;text-align:center;padding:30px 20px 40px;color:var(--mute);font-size:14px}
+#top{position:fixed;right:20px;bottom:20px;z-index:20;width:48px;height:48px;border-radius:50%;border:0;color:#fff;font-size:18px;cursor:pointer;background:linear-gradient(135deg,var(--a),var(--c));opacity:0;transform:translateY(20px);pointer-events:none;transition:.3s}
+#top.show{opacity:1;transform:none;pointer-events:auto}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.art{max-width:240px;order:-1}}
+@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
 </style>
-
 </head>
 <body>
-  <h1><i class="fas fa-book-open"></i> Syllabus PDFs</h1>
-  
-  <div class="search-container">
-  <input type="text" id="pdfSearch" placeholder="Search PDF..." onkeyup="filterPDFs()" />
+<div class="orbs"><i></i><i></i><i></i></div><div class="grid-bg"></div>
+
+<div id="lock">
+  <form class="lockbox" id="box" autocomplete="off">
+    <div class="shield"><i class="fa-solid fa-lock"></i></div>
+    <h2>Private Library</h2>
+    <p>Enter the password to open the syllabus library.</p>
+    <div class="field">
+      <i class="fa-solid fa-key l"></i>
+      <input id="pw" type="password" placeholder="Password" aria-label="Password" autofocus>
+      <button type="button" class="eye" id="eye" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+    </div>
+    <p class="err" id="err" role="alert"></p>
+    <button class="btn" type="submit"><i class="fa-solid fa-unlock"></i>&nbsp; Unlock</button>
+  </form>
 </div>
 
-  <div class="container">
-    <!-- PDF Cards Start -->
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="ADV EXCEL.pdf" target="_blank">ADV EXCEL.pdf</a></div>
-        <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="new_adv_excel.pdf" target="_blank">ADV EXCEL (NEW).pdf</a></div>
-        <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="AI Course for Working Professionals Complete.pdf" target="_blank">AI for working professionals</a></div>
-
-    
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Adv. Java.pdf" target="_blank">Adv. Java.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="AUTOCAD.pdf" target="_blank">AUTOCAD.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="C PROGRAMMING.pdf" target="_blank">C PROGRAMMING.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="C++.pdf" target="_blank">C++.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CAA.pdf" target="_blank">CAA.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CATIA.pdf" target="_blank">CATIA.pdf</a></div>
-    
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="solidworks.pdf" target="_blank">Solid Works | Solidworks</a></div>
-    
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CCC.pdf" target="_blank">CCC.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Core Java.pdf" target="_blank">Core Java.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CSS (FS).pdf" target="_blank">CSS (FS).pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CSS.pdf" target="_blank">CSS.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="DCGA.pdf" target="_blank">DCGA.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="DCIT.pdf" target="_blank">DCIT.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Digital Marketing.pdf" target="_blank">Digital Marketing.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="DS.pdf" target="_blank">DS.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="DSA (2).pdf" target="_blank">DS + Algorithms.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="DSA.pdf" target="_blank">DS Advanced.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="EXCEL MASTERCLASS.pdf" target="_blank">EXCEL MASTERCLASS.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="EXCEL.pdf" target="_blank">EXCEL.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="FrontEnd.pdf" target="_blank">FrontEnd.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Full Stack MERN Dev..pdf" target="_blank">Full Stack MERN Dev..pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="GRAPHIC DESIGN.pdf" target="_blank">GRAPHIC DESIGN.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="GST.pdf" target="_blank">GST.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="HTML (FS).pdf" target="_blank">HTML (FS).pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="HTML.pdf" target="_blank">HTML.pdf</a></div>
-        <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="data_analyst.pdf" target="_blank">Data Analyst Complete</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Javascript (FS).pdf" target="_blank">Javascript (FS).pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="MS OFFICE 2021.pdf" target="_blank">MS OFFICE 2021.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="NodeJS (FS).pdf" target="_blank">NodeJS (FS).pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="PHOTOSHOP.pdf" target="_blank">PHOTOSHOP.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="PLSQL.pdf" target="_blank">PLSQL.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="POWERBI.pdf" target="_blank">POWERBI.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="PYTHON ADV.pdf" target="_blank">PYTHON ADV.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="PYTHON EXPERT.pdf" target="_blank">PYTHON EXPERT.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="PYTHON.pdf" target="_blank">PYTHON.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="ReactJS (FS).pdf" target="_blank">ReactJS (FS).pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Sheet1.pdf" target="_blank">Sheet1.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="SKETCHUP.pdf" target="_blank">SKETCHUP.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="SQL Advanced.pdf" target="_blank">SQL Advanced.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="sql.pdf" target="_blank">sql.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TABLEAU.pdf" target="_blank">TABLEAU.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY ADVANCED.pdf" target="_blank">TALLY ADVANCED.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY ERP9.pdf" target="_blank">TALLY ERP9.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY EXPERT.pdf" target="_blank">TALLY EXPERT.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY PRIME ADVANCE & GST .pdf" target="_blank">TALLY PRIME ADVANCE & GST .pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY PRIME BASIC  & GST .pdf" target="_blank">TALLY PRIME BASIC & GST .pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY PRIME EXPERT & GST.pdf" target="_blank">TALLY PRIME EXPERT & GST.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="TALLY PRIME.pdf" target="_blank">TALLY PRIME.pdf</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="Tally.pdf" target="_blank">Tally.pdf</a></div>
-        <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="BDD_Fees_structure.pdf" target="_blank">BDD FEE STRUCTURE.pdf</a></div>
-            <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="WELCOME LETTER (UPDATED).pdf" target="_blank">WELCOME LETTER (UPDATED).pdf</a></div>
-            <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="3DS Max Syllabus.pdf" target="_blank">3DS Max</a></div>
-<div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="VRAY Syllabus.pdf" target="_blank">VRAY | V-RAY</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="CORELDRAW Syllabus.pdf" target="_blank">CORELDRAW | CORALDRAW</a></div>
-        <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="php_syllabus.pdf" target="_blank">PHP</a></div>
-    <div class="card"><i class="fas fa-file-pdf icon"></i><a class="title" href="ADOBE PREMIERE PRO.pdf" target="_blank">ADOBE PREMIERE PRO | Video Editing</a></div>
-    
-
-    <!-- PDF Cards End -->
-
-</div> <footer> <p>&copy; 2025 Disha Computer Institute. All rights reserved.</p> </footer>
+<main id="app">
+  <div class="top">
+    <div class="brand"><span><i class="fa-solid fa-graduation-cap"></i></span>Disha Computer Institute</div>
+    <button class="lockbtn" id="relock"><i class="fa-solid fa-lock"></i>&nbsp; Lock</button>
+  </div>
+  <section class="hero">
+    <div>
+      <h1>Syllabus Library</h1>
+      <p>Every course syllabus in one place. Search by name or pick a category, then open the PDF.</p>
+      <div class="stats">
+        <div class="stat"><b id="n1">0</b><small>Syllabus PDFs</small></div>
+        <div class="stat"><b id="n2">0</b><small>Categories</small></div>
+      </div>
+    </div>
+    <svg class="art" viewBox="0 0 320 300" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#00d4ff"/></linearGradient></defs>
+      <rect x="70" y="40" width="190" height="230" rx="22" fill="url(#g)" opacity=".25" transform="rotate(-8 165 155)"/>
+      <rect x="80" y="30" width="190" height="230" rx="22" fill="#141838" stroke="url(#g)" stroke-width="3"/>
+      <rect x="104" y="62" width="70" height="12" rx="6" fill="#ff5ca8"/>
+      <rect x="104" y="92" width="142" height="9" rx="4.5" fill="#9aa1c7" opacity=".6"/>
+      <rect x="104" y="112" width="120" height="9" rx="4.5" fill="#9aa1c7" opacity=".4"/>
+      <rect x="104" y="132" width="132" height="9" rx="4.5" fill="#9aa1c7" opacity=".4"/>
+      <rect x="104" y="170" width="44" height="64" rx="8" fill="#00d4ff"/>
+      <rect x="158" y="150" width="44" height="84" rx="8" fill="#7c5cff"/>
+      <rect x="212" y="188" width="34" height="46" rx="8" fill="#ff5ca8"/>
+      <circle cx="250" cy="48" r="26" fill="#ffb347"/><path d="M240 48l8 8 14-16" stroke="#0a0d1f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </section>
+  <div class="searchwrap"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Search syllabus, e.g. Python, Tally, AutoCAD" aria-label="Search syllabus"></div>
+  <div class="chips" id="chips"></div>
+  <div class="cards" id="cards"></div>
+  <div class="empty" id="empty"><i class="fa-regular fa-face-frown"></i><div>No syllabus matches your search. Try another word or choose All.</div></div>
+</main>
+<footer>&copy; 2025 Disha Computer Institute. All rights reserved.</footer>
+<button id="top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
 <script>
-  function filterPDFs() {
-    var input, filter, container, cards, title, i, txtValue;
-    input = document.getElementById("pdfSearch");
-    filter = input.value.toUpperCase();
-    container = document.querySelector(".container");
-    cards = container.getElementsByClassName("card");
+const HASH="8e7bb546a61a6fc4d32bcfce470d4738ba15b67739181d6a7dd496787e846d11";
+const CATS={all:["All","fa-layer-group","#7c5cff"],office:["Excel & Office","fa-file-excel","#1fa463"],prog:["Programming","fa-code","#8b5cf6"],web:["Web & Full Stack","fa-globe","#00a9e0"],data:["Data & AI","fa-chart-pie","#ff8a3d"],acc:["Tally & Accounts","fa-calculator","#e8b100"],design:["Design & CAD","fa-pen-ruler","#ff4f8b"],other:["Other","fa-folder-open","#6c7bd6"]};
+const ICONS={"3DS Max":"fa-cube","VRAY":"fa-lightbulb","ADOBE":"fa-film","PHOTOSHOP":"fa-image","GRAPHIC":"fa-palette","CORELDRAW":"fa-bezier-curve","Digital":"fa-bullhorn","BDD":"fa-indian-rupee-sign","WELCOME":"fa-envelope-open-text","Java":"fa-mug-hot","PYTHON":"fa-python fa-brands","React":"fa-react fa-brands","NodeJS":"fa-node-js fa-brands","HTML":"fa-html5 fa-brands","CSS":"fa-css3-alt fa-brands","Javascript":"fa-js fa-brands","php":"fa-php fa-brands","SQL":"fa-database","sql":"fa-database","PLSQL":"fa-database","POWERBI":"fa-chart-column","TABLEAU":"fa-chart-line","AI Course":"fa-robot","data_analyst":"fa-chart-pie","TALLY":"fa-calculator","Tally":"fa-calculator","GST":"fa-receipt"};
+const D=[
+["ADV EXCEL.pdf","ADV EXCEL","office"],["new_adv_excel.pdf","ADV EXCEL (NEW)","office"],["AI Course for Working Professionals Complete.pdf","AI for working professionals","data"],
+["Adv. Java.pdf","Adv. Java","prog"],["AUTOCAD.pdf","AUTOCAD","design"],["C PROGRAMMING.pdf","C PROGRAMMING","prog"],["C++.pdf","C++","prog"],["CAA.pdf","CAA","other"],["CATIA.pdf","CATIA","design"],
+["solidworks.pdf","Solid Works | Solidworks","design"],["CCC.pdf","CCC","office"],["Core Java.pdf","Core Java","prog"],["CSS (FS).pdf","CSS (FS)","web"],["CSS.pdf","CSS","web"],
+["DCGA.pdf","DCGA","other"],["DCIT.pdf","DCIT","other"],["Digital Marketing.pdf","Digital Marketing","other"],["DS.pdf","DS","prog"],["DSA (2).pdf","DS + Algorithms","prog"],["DSA.pdf","DS Advanced","prog"],
+["EXCEL MASTERCLASS.pdf","EXCEL MASTERCLASS","office"],["EXCEL.pdf","EXCEL","office"],["FrontEnd.pdf","FrontEnd","web"],["Full Stack MERN Dev..pdf","Full Stack MERN Dev.","web"],
+["GRAPHIC DESIGN.pdf","GRAPHIC DESIGN","design"],["GST.pdf","GST","acc"],["HTML (FS).pdf","HTML (FS)","web"],["HTML.pdf","HTML","web"],["data_analyst.pdf","Data Analyst Complete","data"],
+["Javascript (FS).pdf","Javascript (FS)","web"],["MS OFFICE 2021.pdf","MS OFFICE 2021","office"],["NodeJS (FS).pdf","NodeJS (FS)","web"],["PHOTOSHOP.pdf","PHOTOSHOP","design"],
+["PLSQL.pdf","PLSQL","data"],["POWERBI.pdf","POWERBI","data"],["PYTHON ADV.pdf","PYTHON ADV","prog"],["PYTHON EXPERT.pdf","PYTHON EXPERT","prog"],["PYTHON.pdf","PYTHON","prog"],
+["ReactJS (FS).pdf","ReactJS (FS)","web"],["Sheet1.pdf","Sheet1","other"],["SKETCHUP.pdf","SKETCHUP","design"],["SQL Advanced.pdf","SQL Advanced","data"],["sql.pdf","sql","data"],["TABLEAU.pdf","TABLEAU","data"],
+["TALLY ADVANCED.pdf","TALLY ADVANCED","acc"],["TALLY ERP9.pdf","TALLY ERP9","acc"],["TALLY EXPERT.pdf","TALLY EXPERT","acc"],["TALLY PRIME ADVANCE & GST .pdf","TALLY PRIME ADVANCE & GST","acc"],
+["TALLY PRIME BASIC  & GST .pdf","TALLY PRIME BASIC & GST","acc"],["TALLY PRIME EXPERT & GST.pdf","TALLY PRIME EXPERT & GST","acc"],["TALLY PRIME.pdf","TALLY PRIME","acc"],["Tally.pdf","Tally","acc"],
+["BDD_Fees_structure.pdf","BDD FEE STRUCTURE","other"],["WELCOME LETTER (UPDATED).pdf","WELCOME LETTER (UPDATED)","other"],["3DS Max Syllabus.pdf","3DS Max","design"],["VRAY Syllabus.pdf","VRAY | V-RAY","design"],
+["CORELDRAW Syllabus.pdf","CORELDRAW | CORALDRAW","design"],["php_syllabus.pdf","PHP","prog"],["ADOBE PREMIERE PRO.pdf","ADOBE PREMIERE PRO | Video Editing","design"]
+];
+const $=id=>document.getElementById(id);
+let active="all",built=false;
 
-    // Loop through all the cards
-    for (i = 0; i < cards.length; i++) {
-      title = cards[i].getElementsByClassName("title")[0];
-      if (title) {
-        txtValue = title.textContent || title.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          cards[i].style.display = "";
-        } else {
-          cards[i].style.display = "none";
-        }
-      }
-    }
-  }
+function iconFor(f,cat){for(const k in ICONS){if(f.indexOf(k)===0||f.toUpperCase().indexOf(k.toUpperCase())===0){const v=ICONS[k];return v.includes("fa-brands")?v:"fa-solid "+v}}return "fa-solid "+CATS[cat][1]}
+function build(){
+  if(built)return;built=true;
+  const used=[...new Set(D.map(d=>d[2]))];
+  $("chips").innerHTML=["all",...Object.keys(CATS).filter(k=>k!=="all"&&used.includes(k))].map(k=>`<button class="chip${k==="all"?" act":""}" data-k="${k}"><i class="fa-solid ${CATS[k][1]}" style="color:${CATS[k][2]}"></i>${CATS[k][0]}</button>`).join("");
+  $("cards").innerHTML=D.map((d,i)=>{const c=CATS[d[2]];return `<a class="card" href="${encodeURI(d[0])}" target="_blank" rel="noopener" data-c="${d[2]}" data-n="${d[1].toLowerCase()}" style="--h:${c[2]};animation-delay:${Math.min(i*35,900)}ms"><div class="ic"><i class="${iconFor(d[0],d[2])}"></i></div><div class="nm">${d[1].replace(/&/g,"&amp;")}</div><div class="meta"><span>${c[0]}</span><span class="view">View PDF <i class="fa-solid fa-arrow-right"></i></span></div></a>`}).join("");
+  $("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;active=b.dataset.k;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("act",x===b));filter()};
+  $("cards").onmousemove=e=>{const c=e.target.closest(".card");if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px")};
+  count($("n1"),D.length);count($("n2"),used.length);
+}
+function count(el,to){let n=0;const t=setInterval(()=>{n++;el.textContent=n;if(n>=to)clearInterval(t)},Math.max(20,900/to))}
+function filter(){
+  const q=$("q").value.trim().toLowerCase();let shown=0;
+  document.querySelectorAll(".card").forEach(c=>{const ok=(active==="all"||c.dataset.c===active)&&c.dataset.n.includes(q);c.style.display=ok?"":"none";if(ok)shown++});
+  $("empty").style.display=shown?"none":"block";
+}
+function unlock(){
+  try{sessionStorage.setItem("disha_ok","1")}catch(e){}
+  build();$("lock").classList.add("gone");$("app").classList.add("on");
+}
+function lock(){
+  try{sessionStorage.removeItem("disha_ok")}catch(e){}
+  $("app").classList.remove("on");$("lock").classList.remove("gone");$("pw").value="";$("err").textContent="";setTimeout(()=>$("pw").focus(),50);
+}
+async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+$("box").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!window.crypto||!crypto.subtle){$("err").textContent="Password check needs a secure (https) page.";return}
+  if(await sha($("pw").value)===HASH){unlock()}
+  else{$("err").textContent="Wrong password. Please try again.";const b=$("box");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");$("pw").select()}
+});
+$("eye").onclick=()=>{const p=$("pw"),s=p.type==="password";p.type=s?"text":"password";$("eye").innerHTML=`<i class="fa-solid ${s?"fa-eye-slash":"fa-eye"}"></i>`;$("eye").setAttribute("aria-label",s?"Hide password":"Show password");p.focus()};
+$("relock").onclick=lock;
+$("q").addEventListener("input",filter);
+document.addEventListener("keydown",e=>{
+  if(e.ctrlKey&&!e.shiftKey&&!e.altKey&&e.key.toLowerCase()==="x"&&!$("app").classList.contains("on")){e.preventDefault();unlock()}
+});
+addEventListener("scroll",()=>$("top").classList.toggle("show",scrollY>400));
+$("top").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+try{if(sessionStorage.getItem("disha_ok")==="1")unlock()}catch(e){}
 </script>
-
- </body> </html>
-
+</body>
+</html>
