@@ -35,6 +35,8 @@ body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family
 .field{position:relative;margin-bottom:12px}
 .field input{width:100%;padding:15px 48px 15px 46px;font:500 16px 'Outfit',sans-serif;color:var(--ink);background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;transition:.25s}
 .field input:focus{outline:none;border-color:var(--b);box-shadow:0 0 0 4px rgba(0,212,255,.18)}
+.field input[readonly]{cursor:not-allowed;opacity:.75;user-select:none}
+.field input[readonly]:focus{border-color:var(--line);box-shadow:none}
 .field .l,.field .eye{position:absolute;top:50%;transform:translateY(-50%);color:var(--mute)}
 .field .l{left:16px}
 .field .eye{right:6px;background:none;border:0;color:var(--mute);cursor:pointer;padding:10px 12px;font-size:16px}
@@ -97,18 +99,25 @@ footer{position:relative;z-index:1;text-align:center;padding:30px 20px 40px;colo
 <div class="orbs"><i></i><i></i><i></i></div><div class="grid-bg"></div>
 
 <div id="lock">
-  <form class="lockbox" id="box" autocomplete="off">
+  <div class="lockbox" id="box">
     <div class="shield"><i class="fa-solid fa-lock"></i></div>
     <h2>Private Library</h2>
     <p>Enter the password to open the syllabus library.</p>
-    <div class="field">
-      <i class="fa-solid fa-key l"></i>
-      <input id="pw" type="password" placeholder="Password" aria-label="Password" autofocus>
-      <button type="button" class="eye" id="eye" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
-    </div>
-    <p class="err" id="err" role="alert"></p>
-    <button class="btn" type="submit"><i class="fa-solid fa-unlock"></i>&nbsp; Unlock</button>
-  </form>
+    <form id="lf" action="about:blank" method="post" target="authframe" autocomplete="on">
+      <div class="field">
+        <i class="fa-solid fa-envelope l"></i>
+        <input id="un" type="email" name="username" value="sohamkore.sk@gmail.com" placeholder="Email" aria-label="Email" autocomplete="username" autocapitalize="off" spellcheck="false" readonly>
+      </div>
+      <div class="field">
+        <i class="fa-solid fa-key l"></i>
+        <input id="pw" type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" autocapitalize="off" spellcheck="false" autofocus>
+        <button type="button" class="eye" id="eye" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <button class="btn" type="submit" id="go"><i class="fa-solid fa-unlock"></i>&nbsp; Unlock</button>
+    </form>
+    <iframe name="authframe" title="" style="display:none"></iframe>
+  </div>
 </div>
 
 <main id="app">
@@ -152,7 +161,7 @@ const HASH="8e7bb546a61a6fc4d32bcfce470d4738ba15b67739181d6a7dd496787e846d11";
 const CATS={all:["All","fa-layer-group","#7c5cff"],office:["Excel & Office","fa-file-excel","#1fa463"],prog:["Programming","fa-code","#8b5cf6"],web:["Web & Full Stack","fa-globe","#00a9e0"],data:["Data & AI","fa-chart-pie","#ff8a3d"],acc:["Tally & Accounts","fa-calculator","#e8b100"],design:["Design & CAD","fa-pen-ruler","#ff4f8b"],other:["Other","fa-folder-open","#6c7bd6"]};
 const ICONS={"3DS Max":"fa-cube","VRAY":"fa-lightbulb","ADOBE":"fa-film","PHOTOSHOP":"fa-image","GRAPHIC":"fa-palette","CORELDRAW":"fa-bezier-curve","Digital":"fa-bullhorn","BDD":"fa-indian-rupee-sign","WELCOME":"fa-envelope-open-text","Java":"fa-mug-hot","PYTHON":"fa-python fa-brands","React":"fa-react fa-brands","NodeJS":"fa-node-js fa-brands","HTML":"fa-html5 fa-brands","CSS":"fa-css3-alt fa-brands","Javascript":"fa-js fa-brands","php":"fa-php fa-brands","SQL":"fa-database","sql":"fa-database","PLSQL":"fa-database","POWERBI":"fa-chart-column","TABLEAU":"fa-chart-line","AI Course":"fa-robot","data_analyst":"fa-chart-pie","TALLY":"fa-calculator","Tally":"fa-calculator","GST":"fa-receipt"};
 const D=[
-["canva.pdf","Canva","design"],["ADV EXCEL.pdf","ADV EXCEL","office"],["new_adv_excel.pdf","ADV EXCEL (NEW)","office"],["AI Course for Working Professionals Complete.pdf","AI for working professionals","data"],
+["ADV EXCEL.pdf","ADV EXCEL","office"],["new_adv_excel.pdf","ADV EXCEL (NEW)","office"],["AI Course for Working Professionals Complete.pdf","AI for working professionals","data"],
 ["Adv. Java.pdf","Adv. Java","prog"],["AUTOCAD.pdf","AUTOCAD","design"],["C PROGRAMMING.pdf","C PROGRAMMING","prog"],["C++.pdf","C++","prog"],["CAA.pdf","CAA","other"],["CATIA.pdf","CATIA","design"],
 ["solidworks.pdf","Solid Works | Solidworks","design"],["CCC.pdf","CCC","office"],["Core Java.pdf","Core Java","prog"],["CSS (FS).pdf","CSS (FS)","web"],["CSS.pdf","CSS","web"],
 ["DCGA.pdf","DCGA","other"],["DCIT.pdf","DCIT","other"],["Digital Marketing.pdf","Digital Marketing","other"],["DS.pdf","DS","prog"],["DSA (2).pdf","DS + Algorithms","prog"],["DSA.pdf","DS Advanced","prog"],
@@ -193,12 +202,30 @@ function lock(){
   try{sessionStorage.removeItem("disha_ok")}catch(e){}
   $("app").classList.remove("on");$("lock").classList.remove("gone");$("pw").value="";$("err").textContent="";setTimeout(()=>$("pw").focus(),50);
 }
-async function sha(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-$("box").addEventListener("submit",async e=>{
-  e.preventDefault();
-  if(!window.crypto||!crypto.subtle){$("err").textContent="Password check needs a secure (https) page.";return}
-  if(await sha($("pw").value)===HASH){unlock()}
-  else{$("err").textContent="Wrong password. Please try again.";const b=$("box");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");$("pw").select()}
+function sha(msg){
+  const by=new TextEncoder().encode(msg),K=[],Hh=[];
+  for(let p=2,n=0;n<64;p++){let pr=true;for(let i=2;i*i<=p;i++)if(p%i===0){pr=false;break}
+    if(pr){if(n<8)Hh[n]=((Math.sqrt(p)%1)*4294967296)>>>0;K[n++]=((Math.pow(p,1/3)%1)*4294967296)>>>0}}
+  const l=by.length,tot=Math.ceil((l+9)/64)*64,buf=new Uint8Array(tot);buf.set(by);buf[l]=128;
+  const dv=new DataView(buf.buffer);dv.setUint32(tot-8,Math.floor(l*8/4294967296));dv.setUint32(tot-4,(l*8)>>>0);
+  const w=new Uint32Array(64),rr=(x,n)=>(x>>>n)|(x<<(32-n));
+  for(let o=0;o<tot;o+=64){
+    for(let i=0;i<16;i++)w[i]=dv.getUint32(o+i*4);
+    for(let i=16;i<64;i++){const x=w[i-15],y=w[i-2];w[i]=(w[i-16]+(rr(x,7)^rr(x,18)^(x>>>3))+w[i-7]+(rr(y,17)^rr(y,19)^(y>>>10)))>>>0}
+    let [a,b,c,d,e,f,g,h]=Hh;
+    for(let i=0;i<64;i++){
+      const t1=(h+(rr(e,6)^rr(e,11)^rr(e,25))+((e&f)^(~e&g))+K[i]+w[i])>>>0;
+      const t2=((rr(a,2)^rr(a,13)^rr(a,22))+((a&b)^(a&c)^(b&c)))>>>0;
+      h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0}
+    [a,b,c,d,e,f,g,h].forEach((v,i)=>Hh[i]=(Hh[i]+v)>>>0)}
+  return Hh.map(x=>x.toString(16).padStart(8,"0")).join("")
+}
+$("lf").addEventListener("submit",e=>{
+  if(sha($("pw").value)===HASH){
+    try{if(window.PasswordCredential)navigator.credentials.store(new PasswordCredential({id:$("lf").username.value,password:$("pw").value,name:"Disha Library"})).catch(()=>{})}catch(x){}
+    unlock();return}
+  e.preventDefault();$("err").textContent="Wrong password. Please try again.";
+  const b=$("box");b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");$("pw").select()
 });
 $("eye").onclick=()=>{const p=$("pw"),s=p.type==="password";p.type=s?"text":"password";$("eye").innerHTML=`<i class="fa-solid ${s?"fa-eye-slash":"fa-eye"}"></i>`;$("eye").setAttribute("aria-label",s?"Hide password":"Show password");p.focus()};
 $("relock").onclick=lock;
