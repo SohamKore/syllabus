@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Syllabus Library - Disha Computer Institute</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--bg:#0a0d1f;--ink:#eef0ff;--mute:#9aa1c7;--glass:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--a:#7c5cff;--b:#00d4ff;--c:#ff5ca8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Outfit',sans-serif;overflow-x:hidden;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orbs i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:float 18s ease-in-out infinite}
+.orbs i:nth-child(1){width:46vmax;height:46vmax;background:var(--a);top:-15vmax;left:-10vmax}
+.orbs i:nth-child(2){width:38vmax;height:38vmax;background:var(--b);bottom:-14vmax;right:-8vmax;animation-delay:-6s}
+.orbs i:nth-child(3){width:28vmax;height:28vmax;background:var(--c);top:40%;left:55%;animation-delay:-12s;opacity:.35}
+@keyframes float{50%{transform:translate(6vmax,-5vmax) scale(1.12)}}
+.grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.18;mask-image:radial-gradient(circle at 50% 30%,#000,transparent 70%)}
+
+/* Lock screen */
+#lock{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,13,31,.55);backdrop-filter:blur(14px);transition:opacity .7s,transform .7s,visibility .7s}
+#lock.gone{opacity:0;transform:scale(1.08);visibility:hidden}
+.lockbox{width:100%;max-width:420px;text-align:center;padding:40px 32px 30px;border-radius:28px;background:var(--glass);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.15);animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.96)}}
+.lockbox.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-12px)}40%,80%{transform:translateX(12px)}}
+.shield{width:92px;height:92px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;font-size:36px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 0 0 rgba(124,92,255,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 26px rgba(124,92,255,0)}100%{box-shadow:0 0 0 0 rgba(124,92,255,0)}}
+.lockbox h2{font-family:'Unbounded',sans-serif;font-size:22px;margin:0 0 8px}
+.lockbox p{margin:0 0 22px;color:var(--mute);font-size:15px}
+.field{position:relative;margin-bottom:12px}
+.field input{width:100%;padding:15px 48px 15px 46px;font:500 16px 'Outfit',sans-serif;color:var(--ink);background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:14px;transition:.25s}
+.field input:focus{outline:none;border-color:var(--b);box-shadow:0 0 0 4px rgba(0,212,255,.18)}
+.field input[readonly]{cursor:not-allowed;opacity:.75;user-select:none}
+.field input[readonly]:focus{border-color:var(--line);box-shadow:none}
+.field .l,.field .eye{position:absolute;top:50%;transform:translateY(-50%);color:var(--mute)}
+.field .l{left:16px}
+.field .eye{right:6px;background:none;border:0;color:var(--mute);cursor:pointer;padding:10px 12px;font-size:16px}
+.field .eye:hover,.field .eye:focus-visible{color:var(--ink)}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;font:600 16px 'Outfit',sans-serif;color:#fff;cursor:pointer;background:linear-gradient(120deg,var(--a),var(--b));transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,92,255,.45)}
+.err{min-height:20px;margin:0 0 10px!important;color:#ff6b86!important;font-size:14px!important}
+.skip{margin-top:20px!important;margin-bottom:0!important;font-size:14px!important}
+kbd{padding:3px 8px;border-radius:7px;background:rgba(255,255,255,.1);border:1px solid var(--line);font:600 13px 'Outfit',sans-serif}
+
+/* App */
+#app{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:36px 20px 70px;}
+#app.on{opacity:1;pointer-events:auto;filter:none;transition:opacity .8s .2s,filter .8s .2s}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600}
+.brand span{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--a),var(--c))}
+.lockbtn{background:var(--glass);border:1px solid var(--line);color:var(--ink);padding:10px 16px;border-radius:12px;font:500 14px 'Outfit',sans-serif;cursor:pointer}
+.lockbtn:hover{border-color:var(--c)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;padding:54px 0 30px}
+.hero h1{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,66px);line-height:1.05;margin:0 0 18px;background:linear-gradient(100deg,#fff,var(--b),var(--a),var(--c),#fff);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 8s linear infinite}
+@keyframes shine{to{background-position:-250% 0}}
+.hero p{color:var(--mute);font-size:18px;max-width:46ch;margin:0 0 26px}
+.stats{display:flex;gap:14px;flex-wrap:wrap}
+.stat{padding:14px 20px;border-radius:16px;background:var(--glass);border:1px solid var(--line)}
+.stat b{display:block;font-family:'Unbounded',sans-serif;font-size:26px}
+.stat small{color:var(--mute)}
+.art{width:100%;max-width:380px;justify-self:center;animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-14px) rotate(1.5deg)}}
+.searchwrap{position:relative;max-width:620px;margin:10px 0 22px}
+.searchwrap i{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--mute)}
+.searchwrap input{width:100%;padding:16px 22px 16px 52px;border-radius:40px;font:500 17px 'Outfit',sans-serif;color:var(--ink);background:var(--glass);border:1px solid var(--line);transition:.25s}
+.searchwrap input:focus{outline:none;border-color:var(--a);box-shadow:0 0 0 5px rgba(124,92,255,.2)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.chip{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:30px;border:1px solid var(--line);background:var(--glass);color:var(--ink);font:500 14px 'Outfit',sans-serif;cursor:pointer;transition:.25s}
+.chip:hover{transform:translateY(-2px)}
+.chip.act{background:linear-gradient(120deg,var(--a),var(--b));border-color:transparent}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.card{--h:#7c5cff;position:relative;display:flex;flex-direction:column;gap:16px;padding:22px;border-radius:22px;text-decoration:none;color:var(--ink);background:var(--glass);border:1px solid var(--line);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;animation:pop .6s both}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--h) 35%,transparent),transparent 60%);opacity:0;transition:opacity .3s}
+.card:hover,.card:focus-visible{transform:translateY(-6px);border-color:var(--h);box-shadow:0 18px 40px color-mix(in srgb,var(--h) 30%,transparent);outline:none}
+.card:hover::before{opacity:1}
+.ic{position:relative;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:24px;color:#fff;background:var(--h);box-shadow:0 8px 20px color-mix(in srgb,var(--h) 55%,transparent);transition:transform .35s}
+.card:hover .ic{transform:rotate(-8deg) scale(1.1)}
+.nm{position:relative;font-weight:600;font-size:18px;line-height:1.3}
+.meta{position:relative;display:flex;justify-content:space-between;align-items:center;margin-top:auto;color:var(--mute);font-size:13px}
+.view{display:flex;align-items:center;gap:6px;color:var(--ink);font-weight:600}
+.card:hover .view i{transform:translateX(4px)}
+.view i{transition:.25s}
+.empty{display:none;text-align:center;padding:60px 0;color:var(--mute)}
+.empty i{font-size:44px;margin-bottom:12px;color:var(--a)}
+footer{position:relative;z-index:1;text-align:center;padding:30px 20px 40px;color:var(--mute);font-size:14px}
+#top{position:fixed;right:20px;bottom:20px;z-index:20;width:48px;height:48px;border-radius:50%;border:0;color:#fff;font-size:18px;cursor:pointer;background:linear-gradient(135deg,var(--a),var(--c));opacity:0;transform:translateY(20px);pointer-events:none;transition:.3s}
+#top.show{opacity:1;transform:none;pointer-events:auto}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.art{max-width:240px;order:-1}}
+@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="orbs"><i></i><i></i><i></i></div><div class="grid-bg"></div>
+
+<main id="app">
+  <div class="top">
+    <div class="brand"><span><i class="fa-solid fa-graduation-cap"></i></span>Disha Computer Institute</div>
+  </div>
+  <section class="hero">
+    <div>
+      <h1>Syllabus Library</h1>
+      <p>Every course syllabus in one place. Search by name or pick a category, then open the PDF.</p>
+      <div class="stats">
+        <div class="stat"><b id="n1">0</b><small>Syllabus PDFs</small></div>
+        <div class="stat"><b id="n2">0</b><small>Categories</small></div>
+      </div>
+    </div>
+    <svg class="art" viewBox="0 0 320 300" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c5cff"/><stop offset="1" stop-color="#00d4ff"/></linearGradient></defs>
+      <rect x="70" y="40" width="190" height="230" rx="22" fill="url(#g)" opacity=".25" transform="rotate(-8 165 155)"/>
+      <rect x="80" y="30" width="190" height="230" rx="22" fill="#141838" stroke="url(#g)" stroke-width="3"/>
+      <rect x="104" y="62" width="70" height="12" rx="6" fill="#ff5ca8"/>
+      <rect x="104" y="92" width="142" height="9" rx="4.5" fill="#9aa1c7" opacity=".6"/>
+      <rect x="104" y="112" width="120" height="9" rx="4.5" fill="#9aa1c7" opacity=".4"/>
+      <rect x="104" y="132" width="132" height="9" rx="4.5" fill="#9aa1c7" opacity=".4"/>
+      <rect x="104" y="170" width="44" height="64" rx="8" fill="#00d4ff"/>
+      <rect x="158" y="150" width="44" height="84" rx="8" fill="#7c5cff"/>
+      <rect x="212" y="188" width="34" height="46" rx="8" fill="#ff5ca8"/>
+      <circle cx="250" cy="48" r="26" fill="#ffb347"/><path d="M240 48l8 8 14-16" stroke="#0a0d1f" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </section>
+  <div class="searchwrap"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" placeholder="Search syllabus, e.g. Python, Tally, AutoCAD" aria-label="Search syllabus"></div>
+  <div class="chips" id="chips"></div>
+  <div class="cards" id="cards"></div>
+  <div class="empty" id="empty"><i class="fa-regular fa-face-frown"></i><div>No syllabus matches your search. Try another word or choose All.</div></div>
+</main>
+<footer>&copy; 2025 Disha Computer Institute. All rights reserved.</footer>
+<button id="top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script>
+const CATS={all:["All","fa-layer-group","#7c5cff"],office:["Excel & Office","fa-file-excel","#1fa463"],prog:["Programming","fa-code","#8b5cf6"],web:["Web & Full Stack","fa-globe","#00a9e0"],data:["Data & AI","fa-chart-pie","#ff8a3d"],acc:["Tally & Accounts","fa-calculator","#e8b100"],design:["Design & CAD","fa-pen-ruler","#ff4f8b"],other:["Other","fa-folder-open","#6c7bd6"]};
+const ICONS={"3DS Max":"fa-cube","VRAY":"fa-lightbulb","ADOBE":"fa-film","PHOTOSHOP":"fa-image","GRAPHIC":"fa-palette","CORELDRAW":"fa-bezier-curve","Digital":"fa-bullhorn","BDD":"fa-indian-rupee-sign","WELCOME":"fa-envelope-open-text","Java":"fa-mug-hot","PYTHON":"fa-python fa-brands","React":"fa-react fa-brands","NodeJS":"fa-node-js fa-brands","HTML":"fa-html5 fa-brands","CSS":"fa-css3-alt fa-brands","Javascript":"fa-js fa-brands","php":"fa-php fa-brands","SQL":"fa-database","sql":"fa-database","PLSQL":"fa-database","POWERBI":"fa-chart-column","TABLEAU":"fa-chart-line","AI Course":"fa-robot","data_analyst":"fa-chart-pie","TALLY":"fa-calculator","Tally":"fa-calculator","GST":"fa-receipt"};
+const D=[
+["canva.pdf","Canva","design"],["new_adv_excel.pdf","ADV EXCEL (NEW)","office"],["AI Course for Working Professionals Complete.pdf","AI for working professionals","data"],
+["Adv. Java.pdf","Adv. Java","prog"],["AUTOCAD.pdf","AUTOCAD","design"],["C PROGRAMMING.pdf","C PROGRAMMING","prog"],["C++.pdf","C++","prog"],["CAA.pdf","CAA","other"],["CATIA.pdf","CATIA","design"],
+["solidworks.pdf","Solid Works | Solidworks","design"],["CCC.pdf","CCC","office"],["Core Java.pdf","Core Java","prog"],["CSS (FS).pdf","CSS (FS)","web"],["CSS.pdf","CSS","web"],
+["DCGA.pdf","DCGA","other"],["DCIT.pdf","DCIT","other"],["Digital Marketing.pdf","Digital Marketing","other"],["DS.pdf","DS","prog"],["DSA (2).pdf","DS + Algorithms","prog"],["DSA.pdf","DS Advanced","prog"],
+["EXCEL MASTERCLASS.pdf","EXCEL MASTERCLASS","office"],["EXCEL.pdf","EXCEL","office"],["FrontEnd.pdf","FrontEnd","web"],["Full Stack MERN Dev..pdf","Full Stack MERN Dev.","web"],
+["GRAPHIC DESIGN.pdf","GRAPHIC DESIGN","design"],["GST.pdf","GST","acc"],["HTML (FS).pdf","HTML (FS)","web"],["HTML.pdf","HTML","web"],["data_analyst.pdf","Data Analyst Complete","data"],
+["Javascript (FS).pdf","Javascript (FS)","web"],["MS OFFICE 2021.pdf","MS OFFICE 2021","office"],["NodeJS (FS).pdf","NodeJS (FS)","web"],["PHOTOSHOP.pdf","PHOTOSHOP","design"],
+["PLSQL.pdf","PLSQL","data"],["POWERBI.pdf","POWERBI","data"],["PYTHON ADV.pdf","PYTHON ADV","prog"],["PYTHON EXPERT.pdf","PYTHON EXPERT","prog"],["PYTHON.pdf","PYTHON","prog"],
+["ReactJS (FS).pdf","ReactJS (FS)","web"],["Sheet1.pdf","Sheet1","other"],["SKETCHUP.pdf","SKETCHUP","design"],["SQL Advanced.pdf","SQL Advanced","data"],["sql.pdf","sql","data"],["TABLEAU.pdf","TABLEAU","data"],
+["TALLY ADVANCED.pdf","TALLY ADVANCED","acc"],["TALLY ERP9.pdf","TALLY ERP9","acc"],["TALLY EXPERT.pdf","TALLY EXPERT","acc"],["TALLY PRIME ADVANCE & GST .pdf","TALLY PRIME ADVANCE & GST","acc"],
+["TALLY PRIME BASIC  & GST .pdf","TALLY PRIME BASIC & GST","acc"],["TALLY PRIME EXPERT & GST.pdf","TALLY PRIME EXPERT & GST","acc"],["TALLY PRIME.pdf","TALLY PRIME","acc"],["Tally.pdf","Tally","acc"],
+["BDD_Fees_structure.pdf","BDD FEE STRUCTURE","other"],["WELCOME LETTER (UPDATED).pdf","WELCOME LETTER (UPDATED)","other"],["3DS Max Syllabus.pdf","3DS Max","design"],["VRAY Syllabus.pdf","VRAY | V-RAY","design"],
+["CORELDRAW Syllabus.pdf","CORELDRAW | CORALDRAW","design"],["php_syllabus.pdf","PHP","prog"],["ADOBE PREMIERE PRO.pdf","ADOBE PREMIERE PRO | Video Editing","design"]
+];
+const $=id=>document.getElementById(id);
+let active="all",built=false;
+
+function iconFor(f,cat){for(const k in ICONS){if(f.indexOf(k)===0||f.toUpperCase().indexOf(k.toUpperCase())===0){const v=ICONS[k];return v.includes("fa-brands")?v:"fa-solid "+v}}return "fa-solid "+CATS[cat][1]}
+function build(){
+  if(built)return;built=true;
+  const used=[...new Set(D.map(d=>d[2]))];
+  $("chips").innerHTML=["all",...Object.keys(CATS).filter(k=>k!=="all"&&used.includes(k))].map(k=>`<button class="chip${k==="all"?" act":""}" data-k="${k}"><i class="fa-solid ${CATS[k][1]}" style="color:${CATS[k][2]}"></i>${CATS[k][0]}</button>`).join("");
+  $("cards").innerHTML=D.map((d,i)=>{const c=CATS[d[2]];return `<a class="card" href="${encodeURI(d[0])}" target="_blank" rel="noopener" data-c="${d[2]}" data-n="${d[1].toLowerCase()}" style="--h:${c[2]};animation-delay:${Math.min(i*35,900)}ms"><div class="ic"><i class="${iconFor(d[0],d[2])}"></i></div><div class="nm">${d[1].replace(/&/g,"&amp;")}</div><div class="meta"><span>${c[0]}</span><span class="view">View PDF <i class="fa-solid fa-arrow-right"></i></span></div></a>`}).join("");
+  $("chips").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;active=b.dataset.k;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("act",x===b));filter()};
+  $("cards").onmousemove=e=>{const c=e.target.closest(".card");if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px")};
+  count($("n1"),D.length);count($("n2"),used.length);
+}
+function count(el,to){let n=0;const t=setInterval(()=>{n++;el.textContent=n;if(n>=to)clearInterval(t)},Math.max(20,900/to))}
+function filter(){
+  const q=$("q").value.trim().toLowerCase();let shown=0;
+  document.querySelectorAll(".card").forEach(c=>{const ok=(active==="all"||c.dataset.c===active)&&c.dataset.n.includes(q);c.style.display=ok?"":"none";if(ok)shown++});
+  $("empty").style.display=shown?"none":"block";
+}
+$("q").addEventListener("input",filter);
+addEventListener("scroll",()=>$("top").classList.toggle("show",scrollY>400));
+$("top").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+build();
+</script>
+</body>
+</html>
